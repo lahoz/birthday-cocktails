@@ -247,13 +247,13 @@ export default function FlavorProfile({ drinks }: FlavorProfileProps) {
                 </div>
               </div>
             </div>
-            <div className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 p-8 dark:bg-white/4">
-              <div className="absolute left-6 top-6 z-10 flex max-w-[220px] flex-col space-y-3">
+            <div className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 p-8 dark:bg-white/4 flex flex-col">
+              <div className="absolute left-6 top-6 bottom-6 z-10 flex w-52 flex-col space-y-3 overflow-hidden">
                 <div className="shrink-0 px-1">
                   <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Drink Count</p>
                   <p className="mt-1 text-4xl leading-none text-primary">{profiles.length}</p>
                 </div>
-                <div className="min-h-0 overflow-y-auto px-1" style={{ maxHeight: 'calc(100% - 80px)' }}>
+                <div className="min-h-0 overflow-y-auto px-1">
                   <div className="space-y-0.5">
                     {profiles.map((profile) => {
                       const isActive = selectedProfile?.id === profile.id;
