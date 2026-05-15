@@ -437,46 +437,46 @@ export default function RasterMode({
     : null;
 
   return (
-    <div className="h-full glassmorphism rounded-[2rem] p-6 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
-      <div className="flex h-full flex-col gap-6 lg:flex-row">
-        <aside className="w-full shrink-0 lg:w-80">
-          <div className="flex h-full min-h-0 flex-col gap-4 overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+    <div className="h-full glassmorphism rounded-[2rem] p-4 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
+      <div className="flex h-full flex-col gap-4 lg:flex-row">
+        <aside className="w-full shrink-0 lg:w-72">
+          <div className="flex h-full min-h-0 flex-col gap-3 overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div className="space-y-1">
-              <h2 className="text-xl text-primary">Settings</h2>
+              <h2 className="text-lg text-primary">Settings</h2>
             </div>
 
-            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
               <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                 Raster Controls
               </p>
-              <div className="mt-4 space-y-3">
+              <div className="mt-3 space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Grid Size
                   </label>
-                  <span className="text-sm text-primary">{gridSize[0]} px</span>
+                  <span className="text-xs text-primary">{gridSize[0]} px</span>
                 </div>
                 <Slider min={8} max={36} step={1} value={gridSize} onValueChange={setGridSize} />
               </div>
-              <div className="mt-5 space-y-3">
+              <div className="mt-3 space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Grid Spacing
                   </label>
-                  <span className="text-sm text-primary">{gridSpacing[0]}%</span>
+                  <span className="text-xs text-primary">{gridSpacing[0]}%</span>
                 </div>
                 <Slider min={0} max={60} step={1} value={gridSpacing} onValueChange={setGridSpacing} />
               </div>
-              <div className="mt-5 space-y-3">
+              <div className="mt-3 space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Gradient Steps
                   </label>
-                  <span className="text-sm text-primary">{gradientSteps[0]}</span>
+                  <span className="text-xs text-primary">{gradientSteps[0]}</span>
                 </div>
                 <Slider min={2} max={16} step={2} value={gradientSteps} onValueChange={setGradientSteps} />
               </div>
-              <div className="mt-5 space-y-2">
+              <div className="mt-3 space-y-2">
                 <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                   Cell Shape
                 </label>
@@ -494,11 +494,11 @@ export default function RasterMode({
 
             {activeRasterView === 'flavor' ? (
               <>
-                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
+                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
                   <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Flavor Controls
                   </p>
-                  <div className="mt-3 space-y-2">
+                  <div className="mt-2 space-y-2">
                     <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                       Blend Mode
                     </label>
@@ -515,47 +515,47 @@ export default function RasterMode({
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="mt-4 space-y-3">
+                  <div className="mt-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                         Blob Blur
                       </label>
-                      <span className="text-sm text-primary">{flavorBlurAmount[0]} px</span>
+                      <span className="text-xs text-primary">{flavorBlurAmount[0]} px</span>
                     </div>
                     <Slider min={0} max={48} step={1} value={flavorBlurAmount} onValueChange={setFlavorBlurAmount} />
                   </div>
-                  <div className="mt-5 space-y-3">
+                  <div className="mt-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                         Spikiness
                       </label>
-                      <span className="text-sm text-primary">{spikiness[0]}%</span>
+                      <span className="text-xs text-primary">{spikiness[0]}%</span>
                     </div>
                     <Slider min={0} max={100} step={1} value={spikiness} onValueChange={setSpikiness} />
                   </div>
                 </div>
 
-                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
+                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
                   <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Shared Colors
                   </p>
-                  <div className="mt-3 space-y-3">
+                  <div className="mt-2 space-y-2">
                     {([
                       ['classic', 'Classic'],
                       ['experimental', 'Experimental'],
                       ['light', 'Light'],
                       ['spiritForward', 'Spirit-Forward'],
                     ] as const).map(([key, label]) => (
-                      <label key={key} className="flex items-center justify-between gap-3 rounded-2xl bg-white/45 px-3 py-2 dark:bg-white/6">
-                        <span className="text-sm text-primary">{label}</span>
-                        <span className="flex items-center gap-2">
+                      <label key={key} className="flex items-center justify-between gap-2 rounded-2xl bg-white/45 px-2 py-1.5 dark:bg-white/6">
+                        <span className="text-xs text-primary">{label}</span>
+                        <span className="flex items-center gap-1">
                           <input
                             type="color"
                             value={colors[key]}
                             onChange={(event) => updateColor(key, event.target.value)}
-                            className="h-8 w-10 cursor-pointer rounded border-0 bg-transparent p-0"
+                            className="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0"
                           />
-                          <span className="w-20 text-right font-mono text-xs text-muted-foreground">{colors[key]}</span>
+                          <span className="w-16 text-right font-mono text-xs text-muted-foreground">{colors[key]}</span>
                         </span>
                       </label>
                     ))}
@@ -564,34 +564,34 @@ export default function RasterMode({
               </>
             ) : (
               <>
-                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
+                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
                   <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Map Controls
                   </p>
-                  <div className="mt-4 space-y-3">
+                  <div className="mt-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                         Bubble Radius
                       </label>
-                      <span className="text-sm text-primary">{bubbleRadius[0]} px</span>
+                      <span className="text-xs text-primary">{bubbleRadius[0]} px</span>
                     </div>
                     <Slider min={0} max={160} step={1} value={bubbleRadius} onValueChange={setBubbleRadius} />
                   </div>
-                  <div className="mt-5 space-y-3">
+                  <div className="mt-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                         Bubble Blur
                       </label>
-                      <span className="text-sm text-primary">{bubbleBlur[0]} px</span>
+                      <span className="text-xs text-primary">{bubbleBlur[0]} px</span>
                     </div>
                     <Slider min={0} max={96} step={1} value={bubbleBlur} onValueChange={setBubbleBlur} />
                   </div>
-                  <div className="mt-5 space-y-3">
+                  <div className="mt-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                         Base Layer Opacity
                       </label>
-                      <span className="text-sm text-primary">{baseLayerOpacity[0]}%</span>
+                      <span className="text-xs text-primary">{baseLayerOpacity[0]}%</span>
                     </div>
                     <Slider min={0} max={100} step={1} value={baseLayerOpacity} onValueChange={setBaseLayerOpacity} />
                   </div>
