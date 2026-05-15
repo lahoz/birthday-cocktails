@@ -48,7 +48,7 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/3 h-80 w-80 rounded-full bg-amber-200/30 blur-3xl dark:bg-orange-500/12"></div>
       </div>
 
-      <div className="relative z-10 flex h-[125vh] w-[125%] origin-top-left scale-[0.8] flex-col gap-6 p-6">
+      <div className="relative z-10 flex h-screen w-full flex-col gap-6 p-6">
         {/* Header */}
         <div className="space-y-4">
           <h1 className="text-4xl font-light tracking-[0.08em] text-primary">
