@@ -57,25 +57,25 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
   const baseOpacity = baseLayerOpacity[0] / 100;
 
   return (
-    <div className="h-full glassmorphism rounded-[2rem] p-4 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
-      <div className="flex h-full flex-col gap-4 lg:flex-row">
-        <aside className="w-full shrink-0 lg:w-72">
-          <div className="flex h-full min-h-0 flex-col gap-3 overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+    <div className="h-full glassmorphism rounded-[2rem] p-6 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
+      <div className="flex h-full flex-col gap-6 lg:flex-row">
+        <aside className="w-full shrink-0 lg:w-80">
+          <div className="flex h-full min-h-0 flex-col gap-4 overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div className="space-y-1">
-              <h2 className="text-lg text-primary">Settings</h2>
+              <h2 className="text-xl text-primary">Settings</h2>
             </div>
 
-            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
               <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                 Bubble Controls
               </p>
 
-              <div className="mt-3 space-y-2">
+              <div className="mt-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Bubble Radius
                   </label>
-                  <span className="text-xs text-primary">{dotRadius[0]} px</span>
+                  <span className="text-sm text-primary">{dotRadius[0]} px</span>
                 </div>
                 <Slider
                   min={0}
@@ -86,12 +86,12 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
                 />
               </div>
 
-              <div className="mt-3 space-y-2">
+              <div className="mt-5 space-y-3">
                 <div className="flex items-center justify-between">
                   <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Bubble Blur
                   </label>
-                  <span className="text-xs text-primary">{blurRadius[0]} px</span>
+                  <span className="text-sm text-primary">{blurRadius[0]} px</span>
                 </div>
                 <Slider
                   min={0}
@@ -102,12 +102,12 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
                 />
               </div>
 
-              <div className="mt-3 space-y-2">
+              <div className="mt-5 space-y-3">
                 <div className="flex items-center justify-between">
                   <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                     Base Layer Opacity
                   </label>
-                  <span className="text-xs text-primary">{baseLayerOpacity[0]}%</span>
+                  <span className="text-sm text-primary">{baseLayerOpacity[0]}%</span>
                 </div>
                 <Slider
                   min={0}
@@ -119,13 +119,13 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
               </div>
             </div>
 
-            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
               <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                 Gradient Field
               </p>
-              <div className="mt-2 rounded-[1.5rem] bg-white/60 p-2 dark:bg-white/8">
+              <div className="mt-3 rounded-[1.5rem] bg-white/60 p-3 dark:bg-white/8">
                 <div
-                  className="h-32 rounded-[1.25rem]"
+                  className="h-40 rounded-[1.25rem]"
                   style={{
                     backgroundImage: `
                       radial-gradient(circle at left center, ${colors.classic}, transparent 55%),
@@ -141,11 +141,11 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
         </aside>
 
         <div className="flex min-h-0 flex-1 flex-col">
-          <section className="relative flex min-h-0 h-full flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-            <div className="mb-3 flex items-center justify-between">
+          <section className="relative flex min-h-0 h-full flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div className="mb-4 flex items-center justify-between">
               <div>
-                <h3 className="text-lg text-primary">Gradient Drink Map</h3>
-                <p className="text-xs text-muted-foreground">A four-way gradient field revealed through soft bubbles.</p>
+                <h3 className="text-xl text-primary">Gradient Drink Map</h3>
+                <p className="text-sm text-muted-foreground">A four-way gradient field revealed through soft bubbles.</p>
               </div>
             </div>
 
@@ -177,9 +177,9 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
 
             <div
               ref={chartSurfaceRef}
-              className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 px-6 pb-8 pt-6 dark:bg-white/4"
+              className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 px-10 pb-12 pt-10 dark:bg-white/4"
             >
-              <div className="absolute inset-x-4 top-6 bottom-8 overflow-hidden rounded-[1.25rem]">
+              <div className="absolute inset-x-6 top-10 bottom-12 overflow-hidden rounded-[1.25rem]">
                 <div className="absolute inset-0 bg-white/12 dark:bg-white/4" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg

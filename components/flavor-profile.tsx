@@ -29,7 +29,6 @@ const DIMENSIONS = [
 export default function FlavorProfile({ drinks }: FlavorProfileProps) {
   const { resolvedTheme } = useTheme();
   const [activeProfileId, setActiveProfileId] = useState<string | null>(null);
-  const [showSettings, setShowSettings] = useState(false);
   const [blendMode, setBlendMode] = useState('normal');
   const [blurAmount, setBlurAmount] = useState([12]);
   const [spikiness, setSpikiness] = useState([100]);
@@ -74,64 +73,187 @@ export default function FlavorProfile({ drinks }: FlavorProfileProps) {
   };
 
   return (
-    <div className="h-full glassmorphism rounded-[2rem] p-4 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
-      <div className="relative flex h-full flex-col">
-        <section className="flex min-h-0 h-full flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-          <div className="mb-3">
-            <h3 className="text-lg text-primary">Gradient Flavor Profile</h3>
-            <p className="text-xs text-muted-foreground">A layered gradient star field with an average profile overlay.</p>
-          </div>
+    <div className="h-full glassmorphism rounded-[2rem] p-6 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
+      <div className="flex h-full flex-col gap-6 lg:flex-row">
+        <aside className="w-full shrink-0 lg:w-80">
+          <div className="flex h-full min-h-0 flex-col gap-4 overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div className="space-y-1">
+              <h2 className="text-xl text-primary">Settings</h2>
+            </div>
 
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-1.5 text-xs text-primary/85">
-              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: colors.classic }}
-                />
-                <span>Classic</span>
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
+              <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                Render Controls
+              </p>
+
+              <div className="mt-3 space-y-2">
+                <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Blend Mode
+                </label>
+                <Select value={blendMode} onValueChange={setBlendMode}>
+                  <SelectTrigger className="w-full rounded-xl border-white/60 bg-white/70 dark:border-white/10 dark:bg-white/8">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="border-white/60 bg-white/92 dark:border-white/10 dark:bg-[#141b24]">
+                    <SelectItem value="normal">Normal</SelectItem>
+                    <SelectItem value="overlay">Overlay</SelectItem>
+                    <SelectItem value="multiply">Multiply</SelectItem>
+                    <SelectItem value="screen">Screen</SelectItem>
+                    <SelectItem value="lighten">Lighten</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: colors.experimental }}
+
+              <div className="mt-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                    Blur
+                  </label>
+                  <span className="text-sm text-primary">{blurAmount[0]} px</span>
+                </div>
+                <Slider
+                  min={0}
+                  max={48}
+                  step={1}
+                  value={blurAmount}
+                  onValueChange={setBlurAmount}
                 />
-                <span>Experimental</span>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: colors.light }}
+
+              <div className="mt-5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                    Spikiness
+                  </label>
+                  <span className="text-sm text-primary">{spikiness[0]}%</span>
+                </div>
+                <Slider
+                  min={0}
+                  max={100}
+                  step={1}
+                  value={spikiness}
+                  onValueChange={setSpikiness}
                 />
-                <span>Light</span>
               </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ backgroundColor: colors.spiritForward }}
-                />
-                <span>Spirit-Forward</span>
-              </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                <span className="h-px w-6 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
-                <span>Average profile</span>
+
+            </div>
+
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
+              <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                Color Controls
+              </p>
+              <div className="mt-3 space-y-3">
+                <label className="flex items-center justify-between gap-3 rounded-2xl bg-white/45 px-3 py-2 dark:bg-white/6">
+                  <span className="text-sm text-primary">Classic</span>
+                  <span className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      value={colors.classic}
+                      onChange={(event) => updateColor('classic', event.target.value)}
+                      className="h-8 w-10 cursor-pointer rounded border-0 bg-transparent p-0"
+                    />
+                    <span className="w-20 text-right font-mono text-xs text-muted-foreground">
+                      {colors.classic}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-center justify-between gap-3 rounded-2xl bg-white/45 px-3 py-2 dark:bg-white/6">
+                  <span className="text-sm text-primary">Experimental</span>
+                  <span className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      value={colors.experimental}
+                      onChange={(event) => updateColor('experimental', event.target.value)}
+                      className="h-8 w-10 cursor-pointer rounded border-0 bg-transparent p-0"
+                    />
+                    <span className="w-20 text-right font-mono text-xs text-muted-foreground">
+                      {colors.experimental}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-center justify-between gap-3 rounded-2xl bg-white/45 px-3 py-2 dark:bg-white/6">
+                  <span className="text-sm text-primary">Light</span>
+                  <span className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      value={colors.light}
+                      onChange={(event) => updateColor('light', event.target.value)}
+                      className="h-8 w-10 cursor-pointer rounded border-0 bg-transparent p-0"
+                    />
+                    <span className="w-20 text-right font-mono text-xs text-muted-foreground">
+                      {colors.light}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-center justify-between gap-3 rounded-2xl bg-white/45 px-3 py-2 dark:bg-white/6">
+                  <span className="text-sm text-primary">Spirit-Forward</span>
+                  <span className="flex items-center gap-2">
+                    <input
+                      type="color"
+                      value={colors.spiritForward}
+                      onChange={(event) => updateColor('spiritForward', event.target.value)}
+                      className="h-8 w-10 cursor-pointer rounded border-0 bg-transparent p-0"
+                    />
+                    <span className="w-20 text-right font-mono text-xs text-muted-foreground">
+                      {colors.spiritForward}
+                    </span>
+                  </span>
+                </label>
               </div>
             </div>
 
-            <button
-              onClick={() => setShowSettings(!showSettings)}
-              className="shrink-0 px-2 py-1 text-xs uppercase tracking-[0.16em] rounded-lg border border-white/40 bg-white/20 hover:bg-white/30 text-primary transition-colors dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/8"
-            >
-              {showSettings ? '✕' : '⚙'} Settings
-            </button>
           </div>
-            <div className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 p-5 dark:bg-white/4 flex flex-col">
-              <div className="absolute left-4 top-4 bottom-4 z-10 flex w-48 flex-col space-y-2 overflow-hidden">
-                <div className="shrink-0 px-1">
-                  <p className="text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Drink Count</p>
-                  <p className="mt-1 text-3xl leading-none text-primary">{profiles.length}</p>
+        </aside>
+
+        <div className="flex min-h-0 flex-1 flex-col">
+          <section className="flex min-h-0 h-full flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-xl text-primary">Gradient Flavor Profile</h3>
+                <p className="text-sm text-muted-foreground">A layered gradient star field with an average profile overlay.</p>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-primary/85">
+                  <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 dark:bg-white/8">
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: colors.classic }}
+                    />
+                    <span>Classic</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 dark:bg-white/8">
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: colors.experimental }}
+                    />
+                    <span>Experimental</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 dark:bg-white/8">
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: colors.light }}
+                    />
+                    <span>Light</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 dark:bg-white/8">
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ backgroundColor: colors.spiritForward }}
+                    />
+                    <span>Spirit-Forward</span>
+                  </div>
+                  <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1.5 dark:bg-white/8">
+                    <span className="h-px w-8 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
+                    <span>Average profile</span>
+                  </div>
                 </div>
-                <div className="min-h-0 overflow-y-auto px-1">
+              </div>
+            </div>
+            <div className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 p-8 dark:bg-white/4">
+              <div className="absolute left-6 top-6 z-10 w-48 space-y-3">
+                <div className="px-1">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Drink Count</p>
+                  <p className="mt-1 text-4xl leading-none text-primary">{profiles.length}</p>
+                </div>
+                <div className="max-h-[55%] overflow-y-auto px-1">
                   <div className="space-y-0.5">
                     {profiles.map((profile) => {
                       const isActive = selectedProfile?.id === profile.id;
@@ -168,132 +290,6 @@ export default function FlavorProfile({ drinks }: FlavorProfileProps) {
               />
             </div>
           </section>
-
-          {showSettings && (
-            <div className="absolute right-4 top-12 z-20 w-72 max-h-[calc(100%-60px)] overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-              <div className="space-y-2">
-                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
-                  <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    Render Controls
-                  </p>
-
-                  <div className="mt-2 space-y-2">
-                    <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                      Blend Mode
-                    </label>
-                    <Select value={blendMode} onValueChange={setBlendMode}>
-                      <SelectTrigger className="w-full rounded-xl border-white/60 bg-white/70 dark:border-white/10 dark:bg-white/8">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="border-white/60 bg-white/92 dark:border-white/10 dark:bg-[#141b24]">
-                        <SelectItem value="normal">Normal</SelectItem>
-                        <SelectItem value="overlay">Overlay</SelectItem>
-                        <SelectItem value="multiply">Multiply</SelectItem>
-                        <SelectItem value="screen">Screen</SelectItem>
-                        <SelectItem value="lighten">Lighten</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="mt-3 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                        Blur
-                      </label>
-                      <span className="text-xs text-primary">{blurAmount[0]} px</span>
-                    </div>
-                    <Slider
-                      min={0}
-                      max={48}
-                      step={1}
-                      value={blurAmount}
-                      onValueChange={setBlurAmount}
-                    />
-                  </div>
-
-                  <div className="mt-3 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                        Spikiness
-                      </label>
-                      <span className="text-xs text-primary">{spikiness[0]}%</span>
-                    </div>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={spikiness}
-                      onValueChange={setSpikiness}
-                    />
-                  </div>
-                </div>
-
-                <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3 dark:border-white/10 dark:bg-white/5">
-                  <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    Color Controls
-                  </p>
-                  <div className="mt-2 space-y-2">
-                    <label className="flex items-center justify-between gap-2 rounded-2xl bg-white/45 px-2 py-1.5 dark:bg-white/6">
-                      <span className="text-xs text-primary">Classic</span>
-                      <span className="flex items-center gap-1">
-                        <input
-                          type="color"
-                          value={colors.classic}
-                          onChange={(event) => updateColor('classic', event.target.value)}
-                          className="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0"
-                        />
-                        <span className="w-16 text-right font-mono text-xs text-muted-foreground">
-                          {colors.classic}
-                        </span>
-                      </span>
-                    </label>
-                    <label className="flex items-center justify-between gap-2 rounded-2xl bg-white/45 px-2 py-1.5 dark:bg-white/6">
-                      <span className="text-xs text-primary">Experimental</span>
-                      <span className="flex items-center gap-1">
-                        <input
-                          type="color"
-                          value={colors.experimental}
-                          onChange={(event) => updateColor('experimental', event.target.value)}
-                          className="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0"
-                        />
-                        <span className="w-16 text-right font-mono text-xs text-muted-foreground">
-                          {colors.experimental}
-                        </span>
-                      </span>
-                    </label>
-                    <label className="flex items-center justify-between gap-2 rounded-2xl bg-white/45 px-2 py-1.5 dark:bg-white/6">
-                      <span className="text-xs text-primary">Light</span>
-                      <span className="flex items-center gap-1">
-                        <input
-                          type="color"
-                          value={colors.light}
-                          onChange={(event) => updateColor('light', event.target.value)}
-                          className="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0"
-                        />
-                        <span className="w-16 text-right font-mono text-xs text-muted-foreground">
-                          {colors.light}
-                        </span>
-                      </span>
-                    </label>
-                    <label className="flex items-center justify-between gap-2 rounded-2xl bg-white/45 px-2 py-1.5 dark:bg-white/6">
-                      <span className="text-xs text-primary">Spirit-Forward</span>
-                      <span className="flex items-center gap-1">
-                        <input
-                          type="color"
-                          value={colors.spiritForward}
-                          onChange={(event) => updateColor('spiritForward', event.target.value)}
-                          className="h-6 w-8 cursor-pointer rounded border-0 bg-transparent p-0"
-                        />
-                        <span className="w-16 text-right font-mono text-xs text-muted-foreground">
-                          {colors.spiritForward}
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>
