@@ -77,46 +77,54 @@ export default function FlavorProfile({ drinks }: FlavorProfileProps) {
     <div className="h-full glassmorphism rounded-[2rem] p-4 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
       <div className="relative flex h-full flex-col">
         <section className="flex min-h-0 h-full flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-          <div className="mb-3 flex items-center justify-between">
-            <div>
-              <h3 className="text-lg text-primary">Gradient Flavor Profile</h3>
-              <p className="text-xs text-muted-foreground">A layered gradient star field with an average profile overlay.</p>
-                <div className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-primary/85">
-                  <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: colors.classic }}
-                    />
-                    <span>Classic</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: colors.experimental }}
-                    />
-                    <span>Experimental</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: colors.light }}
-                    />
-                    <span>Light</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{ backgroundColor: colors.spiritForward }}
-                    />
-                    <span>Spirit-Forward</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
-                    <span className="h-px w-6 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
-                    <span>Average profile</span>
-                  </div>
-                </div>
+          <div className="mb-3">
+            <h3 className="text-lg text-primary">Gradient Flavor Profile</h3>
+            <p className="text-xs text-muted-foreground">A layered gradient star field with an average profile overlay.</p>
+          </div>
+
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-1.5 text-xs text-primary/85">
+              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: colors.classic }}
+                />
+                <span>Classic</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: colors.experimental }}
+                />
+                <span>Experimental</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: colors.light }}
+                />
+                <span>Light</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: colors.spiritForward }}
+                />
+                <span>Spirit-Forward</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-white/60 px-2 py-1 dark:bg-white/8">
+                <span className="h-px w-6 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
+                <span>Average profile</span>
               </div>
             </div>
+
+            <button
+              onClick={() => setShowSettings(!showSettings)}
+              className="shrink-0 px-2 py-1 text-xs uppercase tracking-[0.16em] rounded-lg border border-white/40 bg-white/20 hover:bg-white/30 text-primary transition-colors dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/8"
+            >
+              {showSettings ? '✕' : '⚙'} Settings
+            </button>
+          </div>
             <div className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 p-5 dark:bg-white/4 flex flex-col">
               <div className="absolute left-4 top-4 bottom-4 z-10 flex w-48 flex-col space-y-2 overflow-hidden">
                 <div className="shrink-0 px-1">
@@ -160,13 +168,6 @@ export default function FlavorProfile({ drinks }: FlavorProfileProps) {
               />
             </div>
           </section>
-
-          <button
-            onClick={() => setShowSettings(!showSettings)}
-            className="absolute right-4 top-4 z-20 px-2 py-1 text-xs uppercase tracking-[0.16em] rounded-lg border border-white/40 bg-white/20 hover:bg-white/30 text-primary transition-colors dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/8"
-          >
-            {showSettings ? '✕' : '⚙'} Settings
-          </button>
 
           {showSettings && (
             <div className="absolute right-4 top-12 z-20 w-72 max-h-[calc(100%-60px)] overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
