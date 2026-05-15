@@ -48,10 +48,10 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/3 h-80 w-80 rounded-full bg-amber-200/30 blur-3xl dark:bg-orange-500/12"></div>
       </div>
 
-      <div className="relative z-10 flex h-[125vh] w-[125%] origin-top-left scale-[0.8] flex-col gap-6 p-6">
+      <div className="relative z-10 flex h-screen w-full flex-col gap-4 p-4 overflow-y-auto">
         {/* Header */}
         <div className="space-y-4">
-          <h1 className="text-4xl font-light tracking-[0.08em] text-primary">
+          <h1 className="text-2xl font-light tracking-[0.08em] text-primary">
             Sam&apos;s Birthday Party Drinks
           </h1>
 
@@ -61,7 +61,7 @@ export default function Home() {
               <button
                 key={person}
                 onClick={() => setSelectedPerson(person)}
-                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-300 ${
                   selectedPerson === person
                     ? 'border-white/70 bg-white/75 text-primary shadow-[0_12px_30px_rgba(120,103,88,0.18)] dark:border-white/12 dark:bg-white/12 dark:shadow-[0_12px_30px_rgba(0,0,0,0.28)]'
                     : 'border-border bg-white/30 text-muted-foreground hover:bg-white/45 dark:bg-white/6 dark:hover:bg-white/10'
