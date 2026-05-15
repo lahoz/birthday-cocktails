@@ -6,6 +6,7 @@ import { Cocktail } from '@/lib/cocktail-data';
 import { getThemeColors } from '@/lib/theme-colors';
 import DrinkTooltip from './drink-tooltip';
 import { Slider } from '@/components/ui/slider';
+import SettingsPanel from './settings-panel';
 
 interface DrinkMapProps {
   drinks: Cocktail[];
@@ -57,25 +58,20 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
   const baseOpacity = baseLayerOpacity[0] / 100;
 
   return (
-    <div className="h-full glassmorphism rounded-[2rem] p-6 min-h-0 shadow-[0_20px_60px_rgba(214,194,166,0.18)]">
-      <div className="flex h-full flex-col gap-6 lg:flex-row">
-        <aside className="w-full shrink-0 lg:w-80">
-          <div className="flex h-full min-h-0 flex-col gap-4 overflow-y-auto rounded-[1.5rem] border border-white/60 bg-white/45 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-            <div className="space-y-1">
-              <h2 className="text-xl text-primary">Settings</h2>
-            </div>
-
-            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
-              <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+    <div className="glassmorphism min-h-0 rounded-[2rem] p-3 shadow-[0_20px_60px_rgba(214,194,166,0.18)] sm:p-4 lg:h-full lg:p-5 xl:h-full">
+      <div className="flex min-h-0 flex-col gap-4 xl:h-full xl:flex-row xl:gap-5">
+        <SettingsPanel>
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3.5 dark:border-white/10 dark:bg-white/5">
+              <p className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                 Bubble Controls
               </p>
 
               <div className="mt-4 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  <label className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                     Bubble Radius
                   </label>
-                  <span className="text-sm text-primary">{dotRadius[0]} px</span>
+                  <span className="text-[12px] text-primary sm:text-[13px]">{dotRadius[0]} px</span>
                 </div>
                 <Slider
                   min={0}
@@ -88,10 +84,10 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
 
               <div className="mt-5 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  <label className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                     Bubble Blur
                   </label>
-                  <span className="text-sm text-primary">{blurRadius[0]} px</span>
+                  <span className="text-[12px] text-primary sm:text-[13px]">{blurRadius[0]} px</span>
                 </div>
                 <Slider
                   min={0}
@@ -104,10 +100,10 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
 
               <div className="mt-5 space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  <label className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                     Base Layer Opacity
                   </label>
-                  <span className="text-sm text-primary">{baseLayerOpacity[0]}%</span>
+                  <span className="text-[12px] text-primary sm:text-[13px]">{baseLayerOpacity[0]}%</span>
                 </div>
                 <Slider
                   min={0}
@@ -119,8 +115,8 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
               </div>
             </div>
 
-            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-4 dark:border-white/10 dark:bg-white/5">
-              <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+            <div className="rounded-[1.25rem] border border-white/50 bg-white/55 p-3.5 dark:border-white/10 dark:bg-white/5">
+              <p className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                 Gradient Field
               </p>
               <div className="mt-3 rounded-[1.5rem] bg-white/60 p-3 dark:bg-white/8">
@@ -137,15 +133,14 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
                 />
               </div>
             </div>
-          </div>
-        </aside>
+        </SettingsPanel>
 
-        <div className="flex min-h-0 flex-1 flex-col">
-          <section className="relative flex min-h-0 h-full flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-            <div className="mb-4 flex items-center justify-between">
+        <div className="order-1 flex min-h-0 flex-1 flex-col">
+          <section className="relative flex min-h-[520px] flex-1 flex-col rounded-[1.5rem] border border-white/60 bg-white/35 p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:bg-white/6 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:min-h-[600px] sm:p-4 xl:h-full xl:min-h-0">
+            <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h3 className="text-xl text-primary">Gradient Drink Map</h3>
-                <p className="text-sm text-muted-foreground">A four-way gradient field revealed through soft bubbles.</p>
+                <h3 className="text-base text-primary sm:text-lg">Gradient Drink Map</h3>
+                <p className="text-[13px] text-muted-foreground sm:text-sm">A four-way gradient field revealed through soft bubbles.</p>
               </div>
             </div>
 
@@ -162,7 +157,21 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
             ) : null}
 
             {selectedDrink ? (
-              <div className="absolute right-5 top-5 z-20 w-80">
+              <div className="mb-4 lg:hidden">
+                <div className="glassmorphism glow-wine relative rounded-[1.5rem] p-5" key={`${selectedDrink.drink}-mobile`}>
+                  <button
+                    onClick={() => setSelectedDrink(null)}
+                    className="absolute right-4 top-4 text-muted-foreground hover:text-foreground"
+                  >
+                    ✕
+                  </button>
+                  <DrinkTooltip drink={selectedDrink} expanded />
+                </div>
+              </div>
+            ) : null}
+
+            {selectedDrink ? (
+              <div className="absolute right-5 top-5 z-20 hidden w-80 lg:block">
                 <div className="glassmorphism glow-wine rounded-[1.5rem] p-6" key={selectedDrink.drink}>
                   <button
                     onClick={() => setSelectedDrink(null)}
@@ -177,9 +186,9 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
 
             <div
               ref={chartSurfaceRef}
-              className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 px-10 pb-12 pt-10 dark:bg-white/4"
+              className="relative min-h-0 flex-1 rounded-[1.5rem] bg-white/18 px-4 pb-10 pt-6 dark:bg-white/4 sm:px-8 sm:pb-12 sm:pt-10 lg:px-10"
             >
-              <div className="absolute inset-x-6 top-10 bottom-12 overflow-hidden rounded-[1.25rem]">
+              <div className="absolute inset-x-2 top-6 bottom-10 overflow-hidden rounded-[1.25rem] sm:inset-x-6 sm:top-10 sm:bottom-12">
                 <div className="absolute inset-0 bg-white/12 dark:bg-white/4" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg
@@ -305,12 +314,12 @@ export default function DrinkMap({ drinks, hoveredDrink, onHoverDrink }: DrinkMa
                 <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-primary/15" />
                 <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-primary/15" />
               </div>
-              <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 text-xs tracking-[0.08em] text-primary/75">
+              <div className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 text-[11px] tracking-[0.08em] text-primary/75 sm:bottom-3 sm:text-xs">
                 Classic ← → Experimental
               </div>
-              <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 -rotate-90 text-xs tracking-[0.08em] text-primary/75">
-                Light ← → Spirit-Forward
-              </div>
+                    <div className="pointer-events-none absolute -left-[3%] top-1/2 -translate-y-1/2 -rotate-90 text-[11px] tracking-[0.08em] text-primary/75 sm:-left-[1%] sm:text-xs">
+                      Light ← → Spirit-Forward
+                    </div>
             </div>
           </section>
         </div>

@@ -16,10 +16,13 @@ interface SmoothRadarProps {
   dimensions: string[];
   profiles: DrinkProfile[];
   averageProfile: number[];
+  previewProfile: DrinkProfile | null;
+  showAverageProfile?: boolean;
   selectedProfileId: string | null;
   blendMode: string;
   blurAmount: number;
   spikiness: number;
+  averageStrokeWidth: number;
   colors: {
     classic: string;
     experimental: string;
@@ -67,22 +70,26 @@ export default function SmoothRadar({
   dimensions,
   profiles,
   averageProfile,
+  previewProfile,
+  showAverageProfile = true,
   selectedProfileId,
   blendMode,
   blurAmount,
   spikiness,
+  averageStrokeWidth,
   colors,
 }: SmoothRadarProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    if (!svgRef.current || dimensions.length === 0 || profiles.length === 0) return;
+    if (!svgRef.current || dimensions.length === 0 || (profiles.length === 0 && !previewProfile)) return;
 
     const width = svgRef.current.clientWidth;
     const height = svgRef.current.clientHeight;
-    const margin = 88;
+    const compact = width < 640;
+    const margin = compact ? 56 : 88;
     const radius = Math.min(width, height) / 2 - margin;
-    const labelRadius = radius + 68;
+    const labelRadius = radius + (compact ? 40 : 68);
     const angleSlice = (Math.PI * 2) / dimensions.length;
 
     d3.select(svgRef.current).selectAll('*').remove();
@@ -127,7 +134,9 @@ export default function SmoothRadar({
       .angle((d: PolarPoint) => d.angle)
       .radius((d: PolarPoint) => d.radius * radius);
 
-    const averagePoints = buildBlobPoints(averageProfile, spikiness);
+    const averagePoints = showAverageProfile && averageProfile.length > 0
+      ? buildBlobPoints(averageProfile, spikiness)
+      : [];
 
     const labelLayer = g.append('g');
 
@@ -164,7 +173,7 @@ export default function SmoothRadar({
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .attr('fill', '#756a61')
-      .attr('font-size', '12px')
+      .attr('font-size', compact ? '11px' : '12px')
       .attr('letter-spacing', '0.08em')
       .text((dimension: string) => dimension);
 
@@ -219,16 +228,62 @@ export default function SmoothRadar({
         );
     });
 
-    g.append('path')
-      .datum(averagePoints)
-      .attr('d', radialLine)
-      .attr('fill', 'none')
-      .attr('stroke', 'rgba(255,255,255,0.98)')
-      .attr('stroke-width', 3)
-      .attr('stroke-linejoin', 'round')
-      .attr('stroke-linecap', 'round')
-      .attr('filter', 'url(#average-glow)');
-  }, [averageProfile, blendMode, blurAmount, colors, dimensions, profiles, selectedProfileId, spikiness]);
+    if (previewProfile) {
+      const previewPoints = buildBlobPoints(previewProfile.values, spikiness);
+      const { start, end } = getGradientStops(previewProfile.mapX, previewProfile.mapY, colors);
+      const previewGradientId = 'drinkmaker-preview-gradient';
+      const previewGradient = defs.append('linearGradient')
+        .attr('id', previewGradientId)
+        .attr('gradientUnits', 'objectBoundingBox')
+        .attr('x1', Math.max(0, (previewProfile.mapX + 1) / 2 - 0.35))
+        .attr('y1', Math.max(0, 1 - (previewProfile.mapY + 1) / 2 - 0.35))
+        .attr('x2', Math.min(1, (previewProfile.mapX + 1) / 2 + 0.35))
+        .attr('y2', Math.min(1, 1 - (previewProfile.mapY + 1) / 2 + 0.35));
+
+      previewGradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', start)
+        .attr('stop-opacity', 1);
+
+      previewGradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', end)
+        .attr('stop-opacity', 1);
+
+      const previewGroup = g.append('g')
+        .attr('data-drink-id', previewProfile.id)
+        .style('isolation', 'isolate');
+
+      previewGroup.append('path')
+        .datum(previewPoints)
+        .attr('d', radialLine)
+        .attr('fill', `url(#${previewGradientId})`)
+        .attr('fill-opacity', 0.88)
+        .attr('filter', 'url(#blob-blur)')
+        .attr('transform', 'scale(1.03)');
+
+      previewGroup.append('path')
+        .datum(previewPoints)
+        .attr('d', radialLine)
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(255,255,255,0.92)')
+        .attr('stroke-width', 1.75)
+        .attr('stroke-linejoin', 'round')
+        .attr('stroke-linecap', 'round');
+    }
+
+    if (showAverageProfile && averagePoints.length > 0) {
+      g.append('path')
+        .datum(averagePoints)
+        .attr('d', radialLine)
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(255,255,255,0.98)')
+        .attr('stroke-width', averageStrokeWidth)
+        .attr('stroke-linejoin', 'round')
+        .attr('stroke-linecap', 'round')
+        .attr('filter', 'url(#average-glow)');
+    }
+  }, [averageProfile, averageStrokeWidth, blendMode, blurAmount, colors, dimensions, previewProfile, profiles, selectedProfileId, spikiness]);
 
   return (
     <svg
